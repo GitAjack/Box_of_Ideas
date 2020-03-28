@@ -92,3 +92,4 @@ _WinAPI_SetWindowLong($hWnd, $GWL_STYLE, $iStyle)
 _WinAPI_SetWindowPos($hWnd, $HWND_TOP, 0, 0, @DesktopWidth, @DesktopHeight, $SWP_FRAMECHANGED)
 
 Exit
+EndFunc
