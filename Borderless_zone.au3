@@ -79,17 +79,17 @@ EndFunc
 
 Func apply_parameters()
 
-; Get window style settings into a local var
-Local $iStyle = _WinAPI_GetWindowLong($hWnd, $GWL_STYLE)
+	; Get window style settings into a local var
+	Local $iStyle = _WinAPI_GetWindowLong($hWnd, $GWL_STYLE)
 
-; Modify the variable - setting style settings with a XOR (deleting) and OR (adding)
-$iStyle = BitOR(BitXOR($iStyle, $WS_MINIMIZEBOX, $WS_MAXIMIZEBOX, $WS_CAPTION, $WS_BORDER, $WS_SIZEBOX), $WS_POPUP)
+	; Modify the variable - setting style settings with a XOR (deleting) and OR (adding)
+	$iStyle = BitOR(BitXOR($iStyle, $WS_MINIMIZEBOX, $WS_MAXIMIZEBOX, $WS_CAPTION, $WS_BORDER, $WS_SIZEBOX), $WS_POPUP)
 
-; Apply the style to the window (override current window settings)
-_WinAPI_SetWindowLong($hWnd, $GWL_STYLE, $iStyle)
+	; Apply the style to the window (override current window settings)
+	_WinAPI_SetWindowLong($hWnd, $GWL_STYLE, $iStyle)
 
-; Set new window position
-_WinAPI_SetWindowPos($hWnd, $HWND_TOP, 0, 0, @DesktopWidth, @DesktopHeight, $SWP_FRAMECHANGED)
+	; Set new window position
+	_WinAPI_SetWindowPos($hWnd, $HWND_TOP, 0, 0, @DesktopWidth, @DesktopHeight, $SWP_FRAMECHANGED)
 
-Exit
+	Exit
 EndFunc
