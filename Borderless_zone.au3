@@ -74,7 +74,7 @@ EndFunc
 Func handle_error()
 	GUIDelete("Choose_game")
 	MsgBox(0, "error", "Could not get handle on the chosen window")
-	skip()
+	Exit
 EndFunc
 
 Func apply_parameters()
@@ -91,8 +91,4 @@ _WinAPI_SetWindowLong($hWnd, $GWL_STYLE, $iStyle)
 ; Set new window position
 _WinAPI_SetWindowPos($hWnd, $HWND_TOP, 0, 0, @DesktopWidth, @DesktopHeight, $SWP_FRAMECHANGED)
 
-EndFunc
-
-Func skip()
-	Exit
-EndFunc
+Exit
