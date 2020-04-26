@@ -20,7 +20,7 @@ Global $Choose_game = GUICreate("Choose_game", 331, 223, -1, -1)
 Global $Setting = GUICtrlCreateButton("SET", 96, 184, 75, 25)
 Global $Abort = GUICtrlCreateButton("CANCEL", 176, 184, 75, 25)
 Global $Selection = GUICtrlCreateList("", 8, 0, 313, 175)
-GUICtrlSetData(-1, "Minecraft|Star Wars Jedi Outcast|Supreme Commander Forged Alliance")
+GUICtrlSetData(-1, "Minecraft|Star Wars Jedi Outcast|Supreme Commander Forged Alliance|Dark Souls 3")
 GUISetState(@SW_SHOW)
 #EndRegion ### END Koda GUI section ###
 
@@ -36,6 +36,8 @@ While 1
 			SWJO()
 				Case "Supreme Commander Forged Alliance"
 			SCFA()
+				Case "Dark Souls 3"
+			DS3()
 			EndSwitch
 		Case $Abort
 			Exit
@@ -70,6 +72,14 @@ Func SCFA()
 	apply_parameters()
 EndFunc
 
+; Get a handle on the Dark Souls 3 window
+Func DS3()
+	Global $hWnd = WinGetHandle("[TITLE:DARK SOULS III; CLASS:FDPclass]")
+	If @error Then handle_error()
+	GUIDelete("Choose_game")
+	apply_parameters()
+EndFunc
+
 ; Could not get a handle error
 Func handle_error()
 	GUIDelete("Choose_game")
@@ -79,17 +89,17 @@ EndFunc
 
 Func apply_parameters()
 
-	; Get window style settings into a local var
-	Local $iStyle = _WinAPI_GetWindowLong($hWnd, $GWL_STYLE)
+; Get window style settings into a local var
+Local $iStyle = _WinAPI_GetWindowLong($hWnd, $GWL_STYLE)
 
-	; Modify the variable - setting style settings with a XOR (deleting) and OR (adding)
-	$iStyle = BitOR(BitXOR($iStyle, $WS_MINIMIZEBOX, $WS_MAXIMIZEBOX, $WS_CAPTION, $WS_BORDER, $WS_SIZEBOX), $WS_POPUP)
+; Modify the variable - setting style settings with a XOR (deleting) and OR (adding)
+$iStyle = BitOR(BitXOR($iStyle, $WS_MINIMIZEBOX, $WS_MAXIMIZEBOX, $WS_CAPTION, $WS_BORDER, $WS_SIZEBOX), $WS_POPUP)
 
-	; Apply the style to the window (override current window settings)
-	_WinAPI_SetWindowLong($hWnd, $GWL_STYLE, $iStyle)
+; Apply the style to the window (override current window settings)
+_WinAPI_SetWindowLong($hWnd, $GWL_STYLE, $iStyle)
 
-	; Set new window position
-	_WinAPI_SetWindowPos($hWnd, $HWND_TOP, 0, 0, @DesktopWidth, @DesktopHeight, $SWP_FRAMECHANGED)
+; Set new window position
+_WinAPI_SetWindowPos($hWnd, $HWND_TOP, 0, 0, @DesktopWidth, @DesktopHeight, $SWP_FRAMECHANGED)
 
-	Exit
+Exit
 EndFunc
